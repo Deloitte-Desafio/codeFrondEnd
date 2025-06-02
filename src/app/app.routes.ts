@@ -3,6 +3,7 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 import { RegisterComponent } from './modules/auth/components/register/register.component';
 import { AppointmentFormComponent } from './modules/client/components/appointment-form/appointment-form.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { DashboardClienteComponent } from './components/dashboard-cliente/dashboard-cliente.component';
 
 export const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' }, <- redireciona direto para login/ nao deixa entrar na agenda
@@ -10,5 +11,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'agendar', component:AppointmentFormComponent},
   { path: 'perfil', component: PerfilComponent },
-  { path: '**', redirectTo: 'login' }
+  { path: 'dash', component: DashboardClienteComponent},
+  { path: '**', redirectTo: 'dash' }
 ]

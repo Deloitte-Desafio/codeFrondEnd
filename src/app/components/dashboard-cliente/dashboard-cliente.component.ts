@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AgendamentoDashboard } from '../../models/agendamento/agendamento-dashboard.model';
+import { AgendamentoDashboard } from '../../models/agendamento/agendamento-dashboard.module';
 import { AgendamentoService } from '../../services/agendamento.service';
 import { CommonModule } from '@angular/common';
 

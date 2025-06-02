@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppointmentApiService {
-  private apiUrl = 'SUA_API_URL_AQUI';
+  private apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
