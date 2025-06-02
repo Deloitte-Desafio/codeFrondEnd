@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,12 +21,12 @@ export class LoginComponent {
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern('.*@gmail\\.com$')]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  EsqueciSenha(){
+  esqueciSenha(){
     alert("tá pronto nao")
   }
 

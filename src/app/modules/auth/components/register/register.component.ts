@@ -8,7 +8,7 @@ import { AuthService } from '../../service/auth.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   standalone: true
 })
 export class RegisterComponent {
@@ -24,7 +24,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email, Validators.pattern('.*@gmail\\.com$')]],
+      email: ['', [Validators.required, Validators.email]], // Removed Gmail pattern
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       userType: ['client', Validators.required],

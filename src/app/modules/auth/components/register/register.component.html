@@ -6,52 +6,45 @@
     </div>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-      
+
       <div class="form-group">
         <label for="name" class="form-label">
           <i class="fas fa-user"></i> Nome Completo
         </label>
-        <input 
-          type="text" id="name" formControlName="name" placeholder="Digite seu nome completo"class="form-input"
-          [ngClass]="{ 'input-error': registerForm.get('name')?.touched && registerForm.get('name')?.invalid }"
-        >
+        <input type="text" id="name" formControlName="name" placeholder="Digite seu nome completo" class="form-input"
+          [ngClass]="{ 'input-error': registerForm.get('name')?.touched && registerForm.get('name')?.invalid }">
         <div *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid" class="error-message">
           <i class="fas fa-exclamation-circle"></i> Nome é obrigatório
         </div>
       </div>
 
-     
       <div class="form-group">
         <label for="email" class="form-label">
-          <i class="fas fa-envelope"></i> E-mail (Gmail)
+          <i class="fas fa-envelope"></i> E-mail
         </label>
-        <input 
-          type="email" id="email" formControlName="email" placeholder="seuemail@gmail.com" class="form-input"
-          [ngClass]="{ 'input-error': registerForm.get('email')?.touched && registerForm.get('email')?.invalid }"
-        >
+        <input type="email" id="email" formControlName="email" placeholder="seuemail@exemplo.com" class="form-input"
+          [ngClass]="{ 'input-error': registerForm.get('email')?.touched && registerForm.get('email')?.invalid }">
         <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="error-message">
           <div *ngIf="registerForm.get('email')?.errors?.['required']">
             <i class="fas fa-exclamation-circle"></i> E-mail é obrigatório
           </div>
           <div *ngIf="registerForm.get('email')?.errors?.['email']">
             <i class="fas fa-exclamation-circle"></i> Formato de e-mail inválido
-          </div>
-          <div *ngIf="registerForm.get('email')?.errors?.['pattern']">
-            <i class="fas fa-exclamation-circle"></i> Somente e-mails gmail.com são permitidos
+            <i class="fas fa-exclamation-circle"></i> deve conter &#64; no e-mail. 
           </div>
         </div>
       </div>
 
-     
+
       <div class="form-group">
         <label for="password" class="form-label">
           <i class="fas fa-lock"></i> Senha
         </label>
-        <input 
-          type="password" id="password" formControlName="password" placeholder="Mínimo 6 caracteres"class="form-input"
-          [ngClass]="{ 'input-error': registerForm.get('password')?.touched && registerForm.get('password')?.invalid }"
-        >
-        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="error-message">
+        <input type="password" id="password" formControlName="password" placeholder="Mínimo 6 caracteres"
+          class="form-input"
+          [ngClass]="{ 'input-error': registerForm.get('password')?.touched && registerForm.get('password')?.invalid }">
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
+          class="error-message">
           <div *ngIf="registerForm.get('password')?.errors?.['required']">
             <i class="fas fa-exclamation-circle"></i> Senha é obrigatória
           </div>
@@ -61,26 +54,27 @@
         </div>
       </div>
 
-      
+
       <div class="form-group">
         <label for="confirmPassword" class="form-label">
           <i class="fas fa-lock"></i> Confirmar Senha
         </label>
-        <input 
-          type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Digite a senha novamente"class="form-input"
-          [ngClass]="{ 'input-error': registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['mismatch'] }"
-        >
-        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid" class="error-message">
+        <input type="password" id="confirmPassword" formControlName="confirmPassword"
+          placeholder="Digite a senha novamente" class="form-input"
+          [ngClass]="{ 'input-error': registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['mismatch'] }">
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid"
+          class="error-message">
           <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
             <i class="fas fa-exclamation-circle"></i> Confirmação de senha é obrigatória
           </div>
         </div>
-        <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="error-message">
+        <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+          class="error-message">
           <i class="fas fa-exclamation-circle"></i> As senhas não coincidem
         </div>
       </div>
 
-    
+
       <div class="form-group">
         <label class="form-label">
           <i class="fas fa-user-tag"></i> Tipo de Usuário
@@ -93,7 +87,7 @@
               <span>Cliente</span>
             </div>
           </label>
-          
+
           <label class="user-type-option">
             <input type="radio" formControlName="userType" value="professional">
             <div class="option-card" [class.selected]="registerForm.get('userType')?.value === 'professional'">
@@ -101,7 +95,7 @@
               <span>Profissional</span>
             </div>
           </label>
-          
+
           <label class="user-type-option">
             <input type="radio" formControlName="userType" value="both">
             <div class="option-card" [class.selected]="registerForm.get('userType')?.value === 'both'">
@@ -112,21 +106,21 @@
         </div>
       </div>
 
-     
+
       <div class="form-group" *ngIf="showProfessionField">
         <label for="profession" class="form-label">
           <i class="fas fa-certificate"></i> Área de Atuação
         </label>
-        <input 
-          type="text" id="profession" formControlName="profession" placeholder="Sua área profissional (ex: Designer, Desenvolvedor)"class="form-input"
-          [ngClass]="{ 'input-error': registerForm.get('profession')?.touched && registerForm.get('profession')?.invalid }"
-        >
-        <div *ngIf="registerForm.get('profession')?.touched && registerForm.get('profession')?.invalid" class="error-message">
+        <input type="text" id="profession" formControlName="profession"
+          placeholder="Sua área profissional (ex: Designer, Desenvolvedor)" class="form-input"
+          [ngClass]="{ 'input-error': registerForm.get('profession')?.touched && registerForm.get('profession')?.invalid }">
+        <div *ngIf="registerForm.get('profession')?.touched && registerForm.get('profession')?.invalid"
+          class="error-message">
           <i class="fas fa-exclamation-circle"></i> Área de atuação é obrigatória para profissionais
         </div>
       </div>
 
-      
+
       <div *ngIf="errorMessage" class="alert-message error">
         <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
       </div>
@@ -135,7 +129,7 @@
         <i class="fas fa-check-circle"></i> {{ successMessage }}
       </div>
 
-      
+
       <button type="submit" class="submit-button" [disabled]="registerForm.invalid">
         <i class="fas fa-user-plus"></i> Criar Conta
       </button>
