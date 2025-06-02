@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './modules/auth/components/login/login.component';
+import { RegisterComponent } from './modules/auth/components/register/register.component';
+import { AppointmentFormComponent } from './modules/client/components/appointment-form/appointment-form.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { DashboardClienteComponent } from './components/dashboard-cliente/dashboard-cliente.component';
 
 export const routes: Routes = [
-  { path: '', component: PerfilComponent },
-  { path: 'dashboard-cliente', component: DashboardClienteComponent },
-];
+  //{ path: '', redirectTo: 'login', pathMatch: 'full' }, <- redireciona direto para login/ nao deixa entrar na agenda
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'agendar', component:AppointmentFormComponent},
+  { path: 'perfil', component: PerfilComponent },
+  { path: '**', redirectTo: 'login' }
+]

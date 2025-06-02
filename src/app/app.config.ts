@@ -1,25 +1,9 @@
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-  LOCALE_ID,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
-import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
-
-registerLocaleData(localePt);
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideClientHydration(withEventReplay()),
-    { provide: LOCALE_ID, useValue: 'pt-BR' },
-  ],
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay())]
 };

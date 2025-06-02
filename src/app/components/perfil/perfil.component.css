@@ -1,3 +1,4 @@
+/* Container geral da página */
 .perfil-container {
   max-width: 600px;
   margin: 2rem auto;
@@ -8,12 +9,14 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Título */
 .perfil-container h2 {
   margin-bottom: 1.5rem;
   color: #333333;
   text-align: center;
 }
 
+/* Cada linha de informação */
 .perfil-info {
   margin-bottom: 1rem;
   display: flex;
@@ -30,6 +33,7 @@
   color: #222;
 }
 
+/* Botão de editar */
 button {
   margin-top: 1.5rem;
   padding: 10px 16px;
