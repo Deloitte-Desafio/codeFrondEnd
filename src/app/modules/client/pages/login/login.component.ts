@@ -1,44 +1,39 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  styleUrls: ['./login.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
-  }
-
-  esqueciSenha(){
-    alert("tá pronto nao")
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      
-      if (this.authService.login(email, password)) {
-        this.router.navigate(['/agendar']);
-      } else {
-        this.errorMessage = 'E-mail ou senha incorretos';
-      }
+
+      this.authService.login(email, password).subscribe({
+        next: () => this.router.navigate(['/agendar']),
+        error: () => this.errorMessage = 'E-mail ou senha incorretos'
+      });
     }
   }
 }
