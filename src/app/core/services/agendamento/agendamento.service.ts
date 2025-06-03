@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { AgendamentoDashboard } from '../../../models/agendamento-dashboard.module';
+import { AuthResponse } from '../../../models/auth-response.module';
 
 @Injectable({ providedIn: 'root' })
 export class AgendamentoService {
@@ -9,11 +10,27 @@ export class AgendamentoService {
 
   constructor(private http: HttpClient) {}
 
-  getProximosAgendamentosDoCliente(
-    clienteId: number
-  ): Observable<AgendamentoDashboard[]> {
-    return this.http.get<AgendamentoDashboard[]>(
-      `${this.API}agendamentos/dashboard/cliente/${clienteId}`
+  private getInfo(): Observable<AuthResponse> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token não encontrado no localStorage');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<AuthResponse>(`${this.API}auth`, { headers });
+  }
+
+  getProximosAgendamentosDoCliente(): Observable<AgendamentoDashboard[]> {
+    return this.getInfo().pipe(
+      switchMap((data: AuthResponse) => {
+        const clienteId = data.id; // Extrai o id do response
+        return this.http.get<AgendamentoDashboard[]>(
+          `${this.API}agendamentos/dashboard/cliente/${clienteId}`
+        );
+      })
     );
   }
 }

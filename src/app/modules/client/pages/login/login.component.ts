@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 
@@ -9,7 +15,7 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
   templateUrl: './login.component.html',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -22,7 +28,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
     });
   }
 
@@ -31,8 +37,8 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
 
       this.authService.login(email, password).subscribe({
-        next: () => this.router.navigate(['/agendar']),
-        error: () => this.errorMessage = 'E-mail ou senha incorretos'
+        next: () => this.router.navigate(['/dash']),
+        error: () => (this.errorMessage = 'E-mail ou senha incorretos'),
       });
     }
   }

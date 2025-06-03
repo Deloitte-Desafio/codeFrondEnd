@@ -11,13 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardClienteComponent implements OnInit {
   agendamentos: AgendamentoDashboard[] = [];
-  clienteId = 1; // Troque pelo ID do cliente logado
 
   constructor(private agendamentoService: AgendamentoService) {}
 
   ngOnInit(): void {
     this.agendamentoService
-      .getProximosAgendamentosDoCliente(this.clienteId)
+      .getProximosAgendamentosDoCliente()
       .subscribe((data) => (this.agendamentos = data));
   }
 }
