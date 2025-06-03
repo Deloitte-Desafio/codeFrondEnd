@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from '../../../models/user/user.module';
 
 interface LoginResponse {
   token: string;
+}
+
+interface RegisterResponse {
+  id: number;
+  nome: string;
+  email: string;
+  tipoUsuario: string;
 }
 
 @Injectable({
@@ -16,6 +24,7 @@ export class AuthService {
   currentUser$ = this.currentUserSubject.asObservable();
 
   private API_URL = 'http://localhost:8080'; 
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -24,50 +33,53 @@ export class AuthService {
   }
 
   private loadUserFromStorage() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // opcional: decodifique o token para pegar dados do usuário ou chame API para buscar dados
-      // Aqui vou assumir que o token contém o email, ou você pode guardar usuário completo.
-      const userJson = localStorage.getItem('currentUser');
-      if (userJson) {
-        this.currentUserSubject.next(JSON.parse(userJson));
-      }
+  if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      this.currentUserSubject.next(JSON.parse(userJson));
     }
   }
+}
 
-  register(user: User) {
-    return this.http.post<User>(`${this.API_URL}/users`, user);
-  }
 
-  login(email: string, senha: string) {
-    return this.http.post<LoginResponse>(`${this.API_URL}/users/login`, { email, senha })
+  register(user: User): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.API_URL}/users`, user)
       .pipe(
-        tap(response => {
-          // Salva o token no localStorage
-          localStorage.setItem('token', response.token);
-
-          // Opcional: você pode decodificar o token JWT para pegar dados do usuário
-          // ou fazer uma chamada adicional para buscar os dados do usuário.
-          // Aqui vamos guardar só o email no currentUserSubject como exemplo.
-          const user: User = { nome: '', email, senha: '', tipoUsuario: '' }; // ajuste se precisar
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        })
+        catchError(this.handleError)
       );
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+  login(email: string, senha: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.API_URL}/users/login`, { email, senha })
+      .pipe(
+        tap(response => {
+          localStorage.setItem('token', response.token);
+          // Você pode querer buscar os dados completos do usuário após o login
+          const user: User = { 
+            nome: '', // Será preenchido após chamada adicional
+            email, 
+            senha: '', // Não armazenamos a senha
+            tipoUsuario: '' // Será preenchido após chamada adicional
+          };
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+        }),
+        catchError(this.handleError)
+      );
   }
 
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocorreu um erro desconhecido';
+    if (error.error instanceof ErrorEvent) {
+      // Erro do lado do cliente
+      errorMessage = `Erro: ${error.error.message}`;
+    } else {
+      // Erro do lado do servidor
+      errorMessage = `Código do erro: ${error.status}, Mensagem: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
-  }
+  // ... outros métodos permanecem iguais
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../service/auth.service'; 
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +16,7 @@ export class RegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
   showProfessionField: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +25,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]], // Removed Gmail pattern
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       userType: ['client', Validators.required],
@@ -48,19 +49,48 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    if (this.registerForm.valid) {
+    if (this.registerForm.valid && !this.loading) {
+      this.loading = true;
+      this.errorMessage = '';
+      this.successMessage = '';
+
       const { confirmPassword, ...userData } = this.registerForm.value;
       
-      if (this.authService.register(userData)) {
-        this.successMessage = 'Registro realizado com sucesso!';
-        this.errorMessage = '';
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 2000);
-      } else {
-        this.errorMessage = 'Este e-mail já está cadastrado';
-        this.successMessage = '';
-      }
+    
+      const userToRegister = {
+        nome: userData.name,
+        email: userData.email,
+        senha: userData.password,
+        tipoUsuario: this.mapUserType(userData.userType),
+        profissao: userData.profession || null
+      };
+
+      this.authService.register(userToRegister).subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.successMessage = 'Registro realizado com sucesso!';
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
+        },
+        error: (error) => {
+          this.loading = false;
+          if (error.includes('409')) {
+            this.errorMessage = 'Este e-mail já está cadastrado';
+          } else {
+            this.errorMessage = 'Erro ao registrar. Por favor, tente novamente.';
+          }
+          console.error('Erro no registro:', error);
+        }
+      });
+    }
+  }
+
+  private mapUserType(frontendType: string): string {
+    switch (frontendType) {
+      case 'client': return 'CLIENTE';
+      case 'professional': return 'PROFISSIONAL';
+      default: return 'CLIENTE';
     }
   }
 }

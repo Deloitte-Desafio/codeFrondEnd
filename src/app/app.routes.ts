@@ -12,5 +12,5 @@ export const routes: Routes = [
   { path: 'agendar', component:AppointmentFormComponent},
   { path: 'perfil', component: PerfilComponent },
   { path: 'dash', component: DashboardClienteComponent},
-  { path: '**', redirectTo: 'dash' }
+  { path: '**', redirectTo: 'register' }
 ]

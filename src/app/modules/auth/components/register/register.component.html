@@ -95,17 +95,8 @@
               <span>Profissional</span>
             </div>
           </label>
-
-          <label class="user-type-option">
-            <input type="radio" formControlName="userType" value="both">
-            <div class="option-card" [class.selected]="registerForm.get('userType')?.value === 'both'">
-              <i class="fas fa-user-tie"></i>
-              <span>Ambos</span>
-            </div>
-          </label>
         </div>
       </div>
-
 
       <div class="form-group" *ngIf="showProfessionField">
         <label for="profession" class="form-label">
