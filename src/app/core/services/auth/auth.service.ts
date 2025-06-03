@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from '../../../models/user/user.module';
+import { User } from '../../../models/user.module';
 
 interface LoginResponse {
   token: string;
