@@ -1,0 +1,37 @@
+<div class="appointment-details">
+  <h2>Detalhes dos Agendamentos</h2>
+  <div class="filter">
+    <select [(ngModel)]="filter" name="filter" (change)="updateAppointments()">
+      <option value="day">Hoje</option>
+      <option value="week">Semana</option>
+      <option value="month">Mês</option>
+    </select>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Profissional</th>
+        <th>Serviço</th>
+        <th>Data</th>
+        <th>Horário</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (appointment of appointments; track appointment.id) {
+        <tr>
+        <td>{{ appointment.nomeProfissional }}</td>
+        <td>{{ appointment.nomeServico }}</td>
+        <td>{{ formatDate(appointment.dataHoraInicio) }}</td>
+        <td>{{ formatTime(appointment.dataHoraInicio) }} - {{ formatTime(appointment.dataHoraFim) }}</td>
+        <td>{{ appointment.status }}</td>
+        <td>
+          <button class="btn" (click)="markAsCompleted(appointment.id)">Concluir</button>
+          <button class="btn" (click)="cancelAppointment(appointment.id)">Cancelar</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
