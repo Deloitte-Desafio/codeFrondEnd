@@ -1,0 +1,232 @@
+/* Estilos gerais */
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.register-header {
+  padding: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+}
+
+.register-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.register-header p {
+  margin: 10px 0 0;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.register-form {
+  padding: 30px;
+}
+
+/* Estilos dos campos do formulário */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+  font-size: 15px;
+}
+
+.form-label i {
+  margin-right: 8px;
+  width: 20px;
+  color: #667eea;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  outline: none;
+}
+
+.input-error {
+  border-color: #ff3860;
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 56, 96, 0.1);
+}
+
+.error-message {
+  margin-top: 6px;
+  color: #ff3860;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message i {
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+/* Estilos para os tipos de usuário */
+.user-type-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.user-type-option {
+  flex: 1;
+}
+
+.user-type-option input[type="radio"] {
+  display: none;
+}
+
+.option-card {
+  padding: 15px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: #f9f9f9;
+}
+
+.option-card:hover {
+  border-color: #ccc;
+}
+
+.option-card.selected {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.option-card i {
+  font-size: 24px;
+  color: #667eea;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.option-card span {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Estilos para mensagens de alerta */
+.alert-message {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.alert-message i {
+  margin-right: 10px;
+}
+
+.error {
+  background: #fff5f5;
+  color: #ff3860;
+  border: 1px solid #ffd1d1;
+}
+
+.success {
+  background: #f5fff7;
+  color: #23d160;
+  border: 1px solid #c1f0d1;
+}
+
+/* Estilos para o botão de submit */
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.submit-button:disabled {
+  background: #ddd;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Link para login */
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .user-type-options {
+    flex-direction: column;
+  }
+  
+  .register-header {
+    padding: 20px;
+  }
+  
+  .register-form {
+    padding: 20px;
+  }
+}

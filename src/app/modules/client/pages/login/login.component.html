@@ -1,0 +1,76 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <div class="login-header">
+      <h2>Bem-vindo de Volta</h2>
+      <p>Faça login para acessar sua conta</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    
+     <div class="form-group">
+  <label for="email" class="form-label">
+    <i class="fas fa-envelope"></i> E-mail
+  </label>
+  <input 
+    type="email" 
+    id="email" 
+    formControlName="email" 
+    placeholder="seuemail@exemplo.com"
+    class="form-input"
+    [ngClass]="{ 'input-error': loginForm.get('email')?.touched && loginForm.get('email')?.invalid }"
+  >
+  <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error-message">
+    <div *ngIf="loginForm.get('email')?.errors?.['required']">
+      <i class="fas fa-exclamation-circle"></i> E-mail é obrigatório
+    </div>
+    <div *ngIf="loginForm.get('email')?.errors?.['email']">
+      <i class="fas fa-exclamation-circle"></i> Formato de e-mail inválido
+    </div>
+  </div>
+</div>
+
+      
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock"></i> Senha
+        </label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Digite sua senha"
+          class="form-input"
+          [ngClass]="{ 'input-error': loginForm.get('password')?.touched && loginForm.get('password')?.invalid }"
+        >
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']">
+            <i class="fas fa-exclamation-circle"></i> Senha é obrigatória
+          </div>
+          <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
+            <i class="fas fa-exclamation-circle"></i> Senha deve ter pelo menos 6 caracteres
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="login-options">
+        <label class="remember-me">
+          <input type="checkbox"> Lembrar de mim
+        </label>
+        <a href="#" (click)="esqueciSenha()" class="forgot-password">Esqueci minha senha</a>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert-message error">
+        <i class="fas fa-exclamation-triangle"></i> {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="submit-button" [disabled]="loginForm.invalid">
+        <i class="fas fa-sign-in-alt"></i> Entrar
+      </button>
+
+      <div class="register-link">
+        Não tem uma conta? <a routerLink="/register">Crie uma conta</a>
+      </div>
+    </form>
+  </div>
+</div>
