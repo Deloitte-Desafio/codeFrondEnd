@@ -47,6 +47,20 @@ export const routes: Routes = [
             (m) => m.AppointmentsComponent
           ),
       },
+      {
+        path: 'servicos',
+        loadComponent: () =>
+          import('./client/listar-servicos/listar-servicos.component').then(
+            (m) => m.ListarServicosComponent
+          ),
+      },
+      {
+        path: 'agendar',
+        loadComponent: () =>
+          import('./client/agendar-servico/agendar-servico.component').then(
+            (m) => m.AgendarServicoComponent
+          ),
+      },
     ],
   },
   {
