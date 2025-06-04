@@ -9,9 +9,9 @@ export interface CreateAppointmentRequest {
 }
 export interface AppointmentResponse {
   id: number;
-  cliente: UserResponse;
-  profissional: UserResponse;
-  servico: ServiceResponse;
+  nomeCliente: string;
+  nomeProfissional: string;
+  nomeServico: string;
   dataHoraInicio: string;
   dataHoraFim: string;
   status:
