@@ -7,21 +7,29 @@
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.profile-button {
-  background-color: #4a6fa5;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
+.nav-button.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.2s ease;
 }
 
-.profile-button:hover {
-  background-color: #3a5a8c;
+.nav-button.profile-button:hover {
+  background-color: #f7fafc;
+  border-color: #cbd5e0;
+  color: #2d3748;
 }
 
+.nav-button.profile-button i {
+  color: #718096;
+}
 .dashboard-container h1 {
   color: #1e3a8a;
   font-weight: 700;

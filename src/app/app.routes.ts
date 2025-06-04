@@ -41,19 +41,20 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'appointments',
-        loadComponent: () =>
-          import('./client/appointments/appointments.component').then(
-            (m) => m.AppointmentsComponent
-          ),
-      },
-       {
         path: 'profile',
         loadComponent: () =>
           import('./shared/profile/profile.component').then(
             (m) => m.ProfileComponent
           )
       },
+      {
+        path: 'appointments',
+        loadComponent: () =>
+          import('./client/appointments/appointments.component').then(
+            (m) => m.AppointmentsComponent
+          ),
+      },
+      
     ],
   },
   {
