@@ -1,5 +1,8 @@
 <div class="dashboard-container">
   <h1>Próximos Agendamentos</h1>
+<button class="nav-button profile-button" routerLink="/profile">
+  <i class="fas fa-user"></i> Meu Perfil
+</button>
   <div class="agendamentos-list">
     @for (appointment of appointments; track appointment.id) {
       <div class="agendamento-card">

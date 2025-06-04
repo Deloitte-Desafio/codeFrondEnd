@@ -7,6 +7,20 @@
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.profile-button {
+  background-color: #4a6fa5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+  background-color: #3a5a8c;
+}
 
 .dashboard-container h1 {
   color: #1e3a8a;
