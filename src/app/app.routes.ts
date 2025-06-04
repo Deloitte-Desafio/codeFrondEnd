@@ -47,6 +47,13 @@ export const routes: Routes = [
             (m) => m.AppointmentsComponent
           ),
       },
+       {
+        path: 'profile',
+        loadComponent: () =>
+          import('./shared/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          )
+      },
     ],
   },
   {
