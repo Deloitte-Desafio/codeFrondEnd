@@ -28,8 +28,21 @@ export class AppointmentService {
     );
   }
 
-  getProfessionalAppointments(period: string = 'week'): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/professional?period=${period}`);
+  getProfessionalAppointments(): Observable<any[]> {
+    return this.authService.getCurrentUser().pipe(
+      switchMap((pro) => {
+        const proId = pro.id;
+        return this.http.get<any[]>(
+          `${this.apiUrl}/dashboard/profissional/${proId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+      })
+    );
   }
 
   getAvailableSlots(professionalId: number): Observable<any[]> {

@@ -1,1 +1,46 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+      <header class="dashboard-header">
+        <h1>Bem-vindo ao seu Dashboard, Profissional!</h1>
+        <button class="profile-btn" [routerLink]="['/professional/profile']">Meu Perfil</button>
+      </header>
+
+      <section class="overview">
+        <h2>Visão Geral</h2>
+        <div class="overview-stats">
+          <div class="stat-card">
+            <h3>Agendamentos Hoje</h3>
+            <p>{{ todayAppointments.length }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Serviços Ativos</h3>
+            <p>{{ activeServices }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Disponibilidade</h3>
+            <p>{{ availabilityStatus }}</p>
+          </div>
+        </div>
+
+        <div class="appointments-today">
+          <h3>Agendamentos do Dia</h3>
+
+            @for (agendamento of todayAppointments; track agendamento.id) {
+              <div>
+              <p>{{ agendamento.nomeServico }} com {{ agendamento.nomeCliente }} às
+              {{ agendamento.dataHoraInicio | date:'shortTime' }}</p>
+              </div>
+            }@empty {
+                <p>Nenhum agendamento para hoje.</p>
+            }
+        </div>
+      </section>
+
+      <section class="navigation">
+        <h2>Ações Rápidas</h2>
+        <div class="nav-buttons">
+          <button class="nav-btn" [routerLink]="['/professional/services']">Gerenciar Serviços</button>
+          <button class="nav-btn" [routerLink]="['/professional/availability']">Configurar Disponibilidade</button>
+          <button class="nav-btn" [routerLink]="['/professional/agenda']">Ver Agenda</button>
+        </div>
+      </section>
+    </div>

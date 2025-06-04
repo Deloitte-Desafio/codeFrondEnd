@@ -13,30 +13,24 @@ export class AgendaComponent implements OnInit {
   constructor(private appointmentService: AppointmentService) {}
 
   ngOnInit() {
-    this.loadAppointments('week');
+    this.loadAppointments();
   }
 
-  filterBy(period: string) {
-    this.loadAppointments(period);
-  }
-
-  loadAppointments(period: string) {
-    this.appointmentService
-      .getProfessionalAppointments(period)
-      .subscribe((data) => {
-        this.appointments = data;
-      });
+  loadAppointments() {
+    this.appointmentService.getProfessionalAppointments().subscribe((data) => {
+      this.appointments = data;
+    });
   }
 
   completeAppointment(appointmentId: number) {
     this.appointmentService.markAsCompleted(appointmentId).subscribe(() => {
-      this.loadAppointments('week');
+      this.loadAppointments();
     });
   }
 
   cancelAppointment(appointmentId: number) {
     this.appointmentService.cancelAppointment(appointmentId).subscribe(() => {
-      this.loadAppointments('week');
+      this.loadAppointments();
     });
   }
 }
