@@ -1,0 +1,5 @@
+<div>
+@for (slot of slots; track slot.id) {
+  <button (click)="selectSlot(slot)">{{ slot.startTime | date: 'shortTime' }}</button>
+}
+</div>

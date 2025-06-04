@@ -1,0 +1,30 @@
+<div class="dashboard-container">
+  <h1>Próximos Agendamentos</h1>
+  <div class="agendamentos-list">
+    @for (appointment of appointments; track appointment.id) {
+      <div class="agendamento-card">
+      <div class="agendamento-card-header">
+        <div>
+          <p class="profissional-nome">
+            Profissional: {{ appointment.nomeProfissional }}
+          </p>
+          <p class="servico-nome">Serviço: {{ appointment.nomeServico }}</p>
+        </div>
+        <div>
+          <span class="status-badge">
+            {{ appointment.status }}
+          </span>
+        </div>
+      </div>
+      <div class="appointment-card-body">
+  <p><strong>Início:</strong> {{ appointment.dataHoraInicio | date:'EEEE, d \'de\' MMMM \'de\' y, \'às\' HH:mm' }}</p>
+  <p><strong>Fim:</strong> {{ appointment.dataHoraFim | date:'HH:mm' }}</p>
+</div>
+
+    </div>
+    }@empty {
+      <p>Não há agendamentos</p>
+    }
+
+  </div>
+</div>
