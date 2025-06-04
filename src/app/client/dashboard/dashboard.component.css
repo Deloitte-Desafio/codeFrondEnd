@@ -67,7 +67,11 @@
   color: #1e40af;
   background-color: #bfdbfe;
   text-transform: uppercase;
+  word-wrap: break-word;  /* Adiciona essa linha */
+  overflow: hidden;  /* Impede que o texto ultrapasse o limite */
 }
+
+
 
 .agendamento-card-body {
   font-size: 0.9rem;
@@ -77,6 +81,25 @@
 
 .agendamento-card-body strong {
   font-weight: 600;
+}
+
+.btn-servicos {
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-Top: 60px;
+  padding: 10px 25px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-servicos:hover {
+  background-color: #303f9f;
 }
 
 @media (max-width: 480px) {
