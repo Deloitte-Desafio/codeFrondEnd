@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { ServiceResponse } from '../models/servico.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,1 +1,50 @@
-<p>services works!</p>
+<div class="services-container">
+      <header class="services-header">
+        <h1>Gerenciar Serviços</h1>
+        <button class="back-btn" [routerLink]="['/professional/dash']">Voltar ao Dashboard</button>
+      </header>
+
+      <section class="services-list">
+        <h2>Seus Serviços</h2>
+        <div class="service-cards">
+          @for (servico of servicos; track servico.id) {
+             <div class="service-card">
+            <h3>{{ servico.nome }}</h3>
+            <p>{{ servico.descricao }}</p>
+            <p><strong>Duração:</strong> {{ servico.duracaoMinutos }} minutos</p>
+            <div class="card-actions">
+              <button class="edit-btn" (click)="editService(servico)">Editar</button>
+              <button class="delete-btn" (click)="deleteService(servico.id)">Excluir</button>
+            </div>
+          </div>
+          }
+         @empty {
+          <p>Não há serviços cadastrados</p>
+         }
+        </div>
+      </section>
+
+      <section class="service-form">
+        <h2>{{ isEditing ? 'Editar Serviço' : 'Adicionar Novo Serviço' }}</h2>
+        <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input id="nome" formControlName="nome" placeholder="Nome do serviço">
+          </div>
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" formControlName="descricao" placeholder="Descrição do serviço"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="duracaoMinutos">Duração (minutos)</label>
+            <input id="duracaoMinutos" formControlName="duracaoMinutos" type="number" placeholder="Duração">
+          </div>
+          <div class="form-actions">
+            <button type="submit" [disabled]="serviceForm.invalid">
+              {{ isEditing ? 'Salvar Alterações' : 'Adicionar Serviço' }}
+            </button>
+            <button type="button" *ngIf="isEditing" (click)="cancelEdit()">Cancelar</button>
+          </div>
+        </form>
+      </section>
+    </div>
