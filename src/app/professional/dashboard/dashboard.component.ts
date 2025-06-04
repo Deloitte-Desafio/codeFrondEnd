@@ -3,7 +3,6 @@ import { AppointmentService } from '../../client/appointment.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AppointmentResponse } from '../../models/agendamento.model';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
