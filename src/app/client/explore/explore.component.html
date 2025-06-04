@@ -1,0 +1,11 @@
+<form [formGroup]="searchForm">
+      <input formControlName="specialty" placeholder="Especialidade">
+      <input formControlName="name" placeholder="Nome">
+</form>
+<div >
+  @for(profissional of profissionais; track profissional.id){
+    <h3>{{ profissional.name }}</h3>
+    <button (click)="viewAvailability(profissional.id)">Ver Disponibilidade</button>
+  }
+</div>
+

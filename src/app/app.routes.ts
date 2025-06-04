@@ -1,16 +1,88 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './modules/client/pages/login/login.component';
-import { RegisterComponent } from './modules/client/pages/register/register.component';
-import { AppointmentFormComponent } from './modules/client/pages/appointment-form/appointment-form.component';
-import { PerfilComponent } from './modules/client/pages/perfil/perfil.component';
-import { DashboardClienteComponent } from './modules/client/pages/dashboard-cliente/dashboard-cliente.component';
+
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-  //{ path: '', redirectTo: 'login', pathMatch: 'full' }, <- redireciona direto para login/ nao deixa entrar na agenda
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'agendar', component:AppointmentFormComponent},
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'dash', component: DashboardClienteComponent},
-  { path: '**', redirectTo: 'register' }
-]
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  {
+    path: 'auth',
+    children: [
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./auth/login/login.component').then((m) => m.LoginComponent),
+      },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./auth/register/register.component').then(
+            (m) => m.RegisterComponent
+          ),
+      },
+    ],
+  },
+  {
+    path: 'client',
+    canActivate: [AuthGuard],
+    data: { role: 'CLIENTE' },
+    children: [
+      {
+        path: 'dash',
+        loadComponent: () =>
+          import('./client/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
+      },
+      {
+        path: 'schedule/:id',
+        loadComponent: () =>
+          import('./client/schedule/schedule.component').then(
+            (m) => m.ScheduleComponent
+          ),
+      },
+      {
+        path: 'appointments',
+        loadComponent: () =>
+          import('./client/appointments/appointments.component').then(
+            (m) => m.AppointmentsComponent
+          ),
+      },
+    ],
+  },
+  {
+    path: 'professional',
+    canActivate: [AuthGuard],
+    data: { role: 'PROFISSIONAL' },
+    children: [
+      {
+        path: 'dash',
+        loadComponent: () =>
+          import('./professional/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
+      },
+      {
+        path: 'services',
+        loadComponent: () =>
+          import('./professional/services/services.component').then(
+            (m) => m.ServicesComponent
+          ),
+      },
+      {
+        path: 'availability',
+        loadComponent: () =>
+          import('./professional/availability/availability.component').then(
+            (m) => m.AvailabilityComponent
+          ),
+      },
+      {
+        path: 'agenda',
+        loadComponent: () =>
+          import('./professional/agenda/agenda.component').then(
+            (m) => m.AgendaComponent
+          ),
+      },
+    ],
+  },
+  { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
+];
