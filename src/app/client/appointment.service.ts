@@ -29,6 +29,8 @@ export class AppointmentService {
     );
   }
 
+  
+
   getProfessionalAppointments(): Observable<any[]> {
     return this.authService.getCurrentUser().pipe(
       switchMap((pro) => {
@@ -81,6 +83,18 @@ export class AppointmentService {
       appointmentId
     );
   }
+
+  cancelApointment(appointmentId: number): Observable<void> {
+  return this.http.delete<void>(
+    `${this.apiUrl}/${appointmentId}/cancelar`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }
+  );
+}
 
   
 }

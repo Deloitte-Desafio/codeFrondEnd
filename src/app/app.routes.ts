@@ -41,20 +41,7 @@ export const routes: Routes = [
             (m) => m.DashboardComponent
           ),
       },
-      {
-        path: 'schedule/:id',
-        loadComponent: () =>
-          import('./client/schedule/schedule.component').then(
-            (m) => m.ScheduleComponent
-          ),
-      },
-      {
-        path: 'appointments',
-        loadComponent: () =>
-          import('./client/appointments/appointments.component').then(
-            (m) => m.AppointmentsComponent
-          ),
-      },
+
       {
         path: 'servicos',
         loadComponent: () =>
