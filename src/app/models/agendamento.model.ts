@@ -27,3 +27,11 @@ export interface SlotResponse {
   dataHoraFim: string;
   available: boolean;
 }
+
+export interface AgendamentoRequest {
+  clienteId: number;
+  profissionalId: number;
+  servicoId: number;
+  dataHoraInicio: string; 
+  dataHoraFim: string;    
+}

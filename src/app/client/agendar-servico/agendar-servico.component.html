@@ -1,0 +1,41 @@
+<button routerLink="/client/servicos" class="btn-voltar">
+  ⬅ Voltar para Servicos
+</button>
+
+<div class="container">
+  <h2>Agendar Serviço</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="dataHoraInicio">Data e Hora de Início</label>
+      <input
+        type="datetime-local"
+        id="dataHoraInicio"
+        formControlName="dataHoraInicio"
+        [class.invalid]="form.get('dataHoraInicio')?.invalid && form.get('dataHoraInicio')?.touched"
+      />
+      <div *ngIf="form.get('dataHoraInicio')?.hasError('required') && form.get('dataHoraInicio')?.touched" class="error">
+        A data e hora de início são obrigatórias
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dataHoraFim">Data e Hora de Término</label>
+      <input
+        type="datetime-local"
+        id="dataHoraFim"
+        formControlName="dataHoraFim"
+        [class.invalid]="form.get('dataHoraFim')?.invalid && form.get('dataHoraFim')?.touched"
+      />
+      <div *ngIf="form.get('dataHoraFim')?.hasError('required') && form.get('dataHoraFim')?.touched" class="error">
+        A data e hora de fim são obrigatórias
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Agendar</button>
+  </form>
+</div>

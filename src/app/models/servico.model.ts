@@ -1,17 +1,24 @@
 import { UserResponse } from './user.model';
 
-//para criar/editar serviço em /api/professionals/services
-export interface CreateServiceRequest {
+export interface ServiceRequest {
   nome: string;
   descricao: string;
-  duracaoEmMinutos: number;
+  duracaoMinutos: number;
+  profissionalId: number;
 }
 
-//retornado em /api/professionals/services ou /api/professionals/search
 export interface ServiceResponse {
   id: number;
   nome: string;
   descricao: string;
-  duracaoEmMinutos: number;
-  profissional: UserResponse; // Relacionamento ManyToOne
+  duracaoMinutos: number;
+  profissional: UserResponse;
+}
+export interface Servico {
+  id: number;
+  nome: string;
+  descricao: string;
+  duracaoMinutos: number;
+  profissionalId: number;
+  nomeProfissional?: string; // opcional para preencher depois
 }

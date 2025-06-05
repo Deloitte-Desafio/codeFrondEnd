@@ -1,1 +1,53 @@
-<p>availability works!</p>
+<div class="availability-container">
+      <header class="availability-header">
+        <h1>Gerenciar Disponibilidade</h1>
+        <button class="back-btn" [routerLink]="['/professional/dash']">Voltar ao Dashboard</button>
+      </header>
+
+      <section class="availability-list">
+        <h2>Sua Disponibilidade</h2>
+        <div class="availability-cards" *ngIf="availabilities.length; else noAvailabilities">
+          <div class="availability-card" *ngFor="let availability of availabilities">
+            <div class="card-content">
+              <p><strong>Dia:</strong> {{ formatDay(availability.diaDaSemana) }}</p>
+              <p><strong>Início:</strong> {{ availability.horaInicio.slice(0, 5) }}</p>
+              <p><strong>Fim:</strong> {{ availability.horaFim.slice(0, 5) }}</p>
+            </div>
+            <div class="card-actions">
+              <button class="edit-btn" (click)="editAvailability(availability)">Editar</button>
+              <button class="delete-btn" (click)="deleteAvailability(availability.id)">Excluir</button>
+            </div>
+          </div>
+        </div>
+        <ng-template #noAvailabilities>
+          <p>Nenhuma disponibilidade cadastrada.</p>
+        </ng-template>
+      </section>
+
+      <section class="availability-form">
+        <h2>{{ isEditing ? 'Editar Disponibilidade' : 'Adicionar Nova Disponibilidade' }}</h2>
+        <form [formGroup]="availabilityForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="diaDaSemana">Dia da Semana</label>
+            <select id="diaDaSemana" formControlName="diaDaSemana">
+              <option value="" disabled>Selecione um dia</option>
+              <option *ngFor="let day of daysOfWeek" [value]="day.value">{{ day.label }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="horaInicio">Hora Início</label>
+            <input id="horaInicio" formControlName="horaInicio" type="time">
+          </div>
+          <div class="form-group">
+            <label for="horaFim">Hora Fim</label>
+            <input id="horaFim" formControlName="horaFim" type="time">
+          </div>
+          <div class="form-actions">
+            <button type="submit" [disabled]="availabilityForm.invalid">
+              {{ isEditing ? 'Salvar Alterações' : 'Adicionar Disponibilidade' }}
+            </button>
+            <button type="button" *ngIf="isEditing" (click)="cancelEdit()">Cancelar</button>
+          </div>
+        </form>
+      </section>
+    </div>

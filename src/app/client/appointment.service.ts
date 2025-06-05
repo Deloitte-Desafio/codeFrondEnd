@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { AppointmentResponse } from '../models/agendamento.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,20 @@ export class AppointmentService {
     );
   }
 
+  getProfessionalAgendaAppointments(): Observable<any[]> {
+    return this.authService.getCurrentUser().pipe(
+      switchMap((pro) => {
+        const proId = pro.id;
+        return this.http.get<any[]>(`${this.apiUrl}/profissional/${proId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+      })
+    );
+  }
+
   getAvailableSlots(professionalId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/slots/${professionalId}`);
   }
@@ -54,13 +69,18 @@ export class AppointmentService {
   }
 
   cancelAppointment(appointmentId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${appointmentId}`);
+    return this.http.put<void>(
+      `${this.apiUrl}/${appointmentId}/cancelar`,
+      appointmentId
+    );
   }
 
   markAsCompleted(appointmentId: number): Observable<void> {
-    return this.http.patch<void>(
-      `${this.apiUrl}/${appointmentId}/complete`,
-      {}
+    return this.http.put<void>(
+      `${this.apiUrl}/${appointmentId}/concluir`,
+      appointmentId
     );
   }
+
+  
 }

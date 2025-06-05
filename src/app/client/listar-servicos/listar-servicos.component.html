@@ -1,0 +1,27 @@
+<div class="container-servicos">
+
+  <button routerLink="/client/dash" class="btn-voltar">
+    ⬅ Voltar para Dashboard
+  </button>
+
+  <div class="card-destaque">
+    <h3>Serviços em Destaque</h3>
+    <p>Confira nossos principais serviços disponíveis</p>
+  </div>
+
+  <div class="grid-servicos">
+    <div class="card-servico" *ngFor="let servico of servicos">
+      <h4>{{ servico.nome }}</h4>
+      <p>{{ servico.descricao }}</p>
+      <p><strong>Duração:</strong> {{ servico.duracaoMinutos }} min</p>
+      <p><strong>Profissional:</strong> {{ servico.nomeProfissional }}</p>
+    
+        <button  class="btn-agendar" [routerLink]="['/client/agendar', servico.id]"[queryParams]="{ profissionalId: servico.profissionalId }">Agendar</button>
+
+    </div>
+  </div>
+
+</div>
+
+
+

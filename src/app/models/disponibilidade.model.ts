@@ -1,5 +1,6 @@
 //para criar/editar disponibilidade em /api/professionals/availability
-export interface CreateAvailabilityRequest {
+export interface AvailabilityRequest {
+  profissionalId: number,
   diaDaSemana:
     | 'SEGUNDA'
     | 'TERCA'

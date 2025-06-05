@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
+import { catchError, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,35 +9,33 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot): boolean {
-    const expectedRole = route.data['role'];
-    const token = localStorage.getItem('token');
-
-    if (!token) {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
+    if (typeof window === 'undefined' || !localStorage.getItem('token')) {
       this.router.navigate(['auth/login']);
       return false;
     }
 
-    // Obtenha o tipoUsuario do usuário logado
-    this.authService.getCurrentUser().subscribe({
-      next: (user) => {
-        if (user.tipoUsuario !== expectedRole) {
+    const expectedRoles = Array.isArray(route.data['roles'])
+      ? route.data['roles']
+      : [route.data['role']];
+
+    return this.authService.getCurrentUser().pipe(
+      map((user) => {
+        if (!user || !expectedRoles.includes(user.tipoUsuario)) {
           console.error(
             'Acesso negado: tipoUsuario não corresponde',
-            user.tipoUsuario,
-            expectedRole
+            user?.tipoUsuario,
+            expectedRoles
           );
           this.router.navigate(['auth/login']);
           return false;
         }
         return true;
-      },
-      error: () => {
+      }),
+      catchError(() => {
         this.router.navigate(['auth/login']);
-        return false;
-      },
-    });
-
-    return true; // Ajuste conforme necessário, dependendo da lógica assíncrona
+        return [false];
+      })
+    );
   }
 }

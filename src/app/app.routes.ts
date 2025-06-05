@@ -22,6 +22,14 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'profile',
+    loadComponent: () =>
+      import('./shared/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
+    data: { roles: ['CLIENTE', 'PROFISSIONAL'] },
+  },
+  {
     path: 'client',
     canActivate: [AuthGuard],
     data: { role: 'CLIENTE' },
@@ -55,6 +63,20 @@ export const routes: Routes = [
           ),
       },
       
+      {
+        path: 'servicos',
+        loadComponent: () =>
+          import('./client/listar-servicos/listar-servicos.component').then(
+            (m) => m.ListarServicosComponent
+          ),
+      },
+      {
+        path: 'agendar/:servicoId',
+        loadComponent: () =>
+          import('./client/agendar-servico/agendar-servico.component').then(
+            (m) => m.AgendarServicoComponent
+          ),
+      },
     ],
   },
   {
@@ -81,7 +103,8 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./shared/profile/profile.component').then(
             (m) => m.ProfileComponent
-          )
+          ),
+        data: { roles: ['CLIENTE', 'PROFISSIONAL'] },
       },
       {
         path: 'availability',

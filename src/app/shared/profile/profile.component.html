@@ -1,6 +1,5 @@
 <div class="profile-page">
   <div class="profile-card">
-    <!-- Cabeçalho do perfil -->
     <header class="profile-header">
       <div class="avatar-wrapper">
         <div class="user-avatar" [style.background]="avatarColor">
@@ -10,7 +9,7 @@
       </div>
     </header>
 
-    <!-- Banner de tipo de usuário -->
+    
     <section class="user-banner" *ngIf="user?.tipoUsuario === 'PROFISSIONAL'">
       <div class="banner-content">
         <i class="fas fa-user-tie banner-icon"></i>
@@ -31,7 +30,7 @@
       </div>
     </section>
 
-    <!-- Informações do usuário -->
+   
     <section class="user-info">
       <div class="info-field">
         <i class="fas fa-id-card info-icon"></i>
@@ -66,13 +65,13 @@
       </div>
     </section>
 
-    <!-- Mensagem de erro -->
+    
     <div class="error-message" *ngIf="errorMessage">
       <i class="fas fa-exclamation-circle error-icon"></i> 
       <span class="error-text">{{ errorMessage }}</span>
     </div>
 
-    <!-- Ações do perfil -->
+  
     <footer class="profile-actions">
       <button class="action-button edit-button" (click)="editProfile()">
         <i class="fas fa-edit"></i> Editar Perfil

@@ -1,0 +1,101 @@
+/* Geral */
+.container-servicos {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Botão de voltar */
+.btn-voltar {
+  background-color: #e2e8f0;
+  border: none;
+  color: #1e293b;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.btn-voltar:hover {
+  background-color: #cbd5e1;
+}
+
+/* Card de destaque */
+.card-destaque {
+  background: #1e3a8a;
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Grade de serviços */
+.grid-servicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Card de serviço */
+.card-servico {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  transition: transform 0.2s ease;
+}
+
+.card-servico:hover {
+  transform: translateY(-5px);
+}
+
+.card-servico h4 {
+  font-size: 1.1rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.card-servico p {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 5px 0;
+}
+
+/* Botão agendar */
+.btn-agendar {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-agendar:hover {
+  background-color: #059669;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.invalid {
+  border-color: red;
+}
