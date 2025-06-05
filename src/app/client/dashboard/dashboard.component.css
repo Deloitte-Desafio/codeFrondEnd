@@ -116,6 +116,20 @@
   background-color: #303f9f;
 }
 
+.btn-cancelar {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-cancelar:hover {
+  background-color: #c0392b;
+}
+
 @media (max-width: 480px) {
   .dashboard-container {
     padding: 1rem;
