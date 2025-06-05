@@ -3,7 +3,7 @@
     <!-- Cabeçalho do perfil -->
     <header class="profile-header">
       <div class="avatar-wrapper">
-        <div class="user-avatar" [style.background]="getRandomColor()">
+        <div class="user-avatar" [style.background]="avatarColor">
           {{ user?.nome?.charAt(0)?.toUpperCase() || 'U' }}
         </div>
         <h1 class="user-name">{{ user?.nome || 'Usuário' }}</h1>
@@ -80,7 +80,7 @@
       <button class="action-button logout-button" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i> Sair
       </button>
-      <button class="action-button back-button" routerLink="/professional/dash">
+      <button class="action-button back-button" [routerLink]="getBackRoute()">
         <i class="fas fa-arrow-left"></i> Voltar
       </button>
     </footer>
