@@ -1,0 +1,52 @@
+/* Container geral da página */
+.perfil-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.perfil-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333333;
+  text-align: center;
+}
+
+/* Cada linha de informação */
+.perfil-info {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.perfil-info strong {
+  color: #555;
+}
+
+.perfil-info span {
+  color: #222;
+}
+
+/* Botão de editar */
+button {
+  margin-top: 1.5rem;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

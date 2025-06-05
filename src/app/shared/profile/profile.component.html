@@ -1,1 +1,28 @@
-<p>profile works!</p>
+@if (user) {
+  <div  class="perfil-container">
+  <h2>Perfil do Usuário</h2>
+
+  <div class="perfil-info">
+    <strong>Nome:</strong>
+    <span>{{ user.nome }}</span>
+  </div>
+
+  <div class="perfil-info">
+    <strong>Email:</strong>
+    <span>{{ user.email }}</span>
+  </div>
+
+  <div class="perfil-info">
+    <strong>Tipo de Usuário:</strong>
+    <span>{{ user.tipoUsuario }}</span>
+  </div>
+
+  <button>Editar Perfil</button>
+  @if (user.tipoUsuario == "CLIENTE") {
+    <button [routerLink]="['/client/dash']">Voltar</button>
+  }@else {
+    <button [routerLink]="['/professional/dash']">Voltar</button>
+  }
+
+</div>
+}
