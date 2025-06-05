@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { ServiceRequest, ServiceResponse } from '../models/servico.model';
 import { AuthService } from '../auth/auth.service';
 
@@ -17,11 +17,15 @@ export class ProfessionalService {
   }
 
   getProfessionalServices(): Observable<ServiceResponse[]> {
-    return this.authService.getCurrentUser().pipe(
+    return this.authService.getUser().pipe(
       switchMap((pro) => {
-        const proId = pro.id;
-        return this.http.get<any[]>(
-          `${this.apiUrl}servicos/profissional/${proId}`,
+        if (!pro?.id) {
+          return throwError(
+            () => new Error('Usuário não autenticado ou sem ID')
+          );
+        }
+        return this.http.get<ServiceResponse[]>(
+          `${this.apiUrl}servicos/profissional/${pro.id}`,
           {
             headers: {
               'Content-Type': 'application/json',

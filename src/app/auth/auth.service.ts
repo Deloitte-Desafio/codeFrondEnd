@@ -25,7 +25,9 @@ export class AuthService {
         tap((response: any) => {
           console.log(response);
           localStorage.setItem('token', response.token);
-          this.userSubject.next(response.user);
+          this.getCurrentUser().subscribe((user) =>
+            this.userSubject.next(user)
+          );
         }),
         catchError((error) => {
           console.error('Erro:', error);
@@ -55,6 +57,10 @@ export class AuthService {
   hasRole(role: string): boolean {
     const user = this.userSubject.value;
     return user && user.role === role;
+  }
+
+  getUser(): Observable<any> {
+    return this.userSubject.asObservable();
   }
 
   getCurrentUser(): Observable<any> {
