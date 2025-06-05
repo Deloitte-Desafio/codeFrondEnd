@@ -42,27 +42,12 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'schedule/:id',
-        loadComponent: () =>
-          import('./client/schedule/schedule.component').then(
-            (m) => m.ScheduleComponent
-          ),
-      },
-      {
         path: 'profile',
         loadComponent: () =>
           import('./shared/profile/profile.component').then(
             (m) => m.ProfileComponent
           )
       },
-      {
-        path: 'appointments',
-        loadComponent: () =>
-          import('./client/appointments/appointments.component').then(
-            (m) => m.AppointmentsComponent
-          ),
-      },
-      
       {
         path: 'servicos',
         loadComponent: () =>
