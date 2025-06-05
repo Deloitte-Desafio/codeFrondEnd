@@ -41,7 +41,13 @@ export const routes: Routes = [
             (m) => m.DashboardComponent
           ),
       },
-
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./shared/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          )
+      },
       {
         path: 'servicos',
         loadComponent: () =>

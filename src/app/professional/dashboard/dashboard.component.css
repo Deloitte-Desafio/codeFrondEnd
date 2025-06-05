@@ -18,6 +18,30 @@
       color: #2c3e50;
     }
 
+    .nav-button.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-button.profile-button:hover {
+  background-color: #f7fafc;
+  border-color: #cbd5e0;
+  color: #2d3748;
+}
+
+.nav-button.profile-button i {
+  color: #718096;
+}
+
     .profile-btn {
       background-color: #3498db;
       color: white;
