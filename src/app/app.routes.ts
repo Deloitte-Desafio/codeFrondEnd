@@ -63,7 +63,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'agendar',
+        path: 'agendar/:servicoId',
         loadComponent: () =>
           import('./client/agendar-servico/agendar-servico.component').then(
             (m) => m.AgendarServicoComponent

@@ -15,9 +15,9 @@
       <p>{{ servico.descricao }}</p>
       <p><strong>Duração:</strong> {{ servico.duracaoMinutos }} min</p>
       <p><strong>Profissional:</strong> {{ servico.nomeProfissional }}</p>
-        <button routerLink="/client/agendar" class="btn-agendar">
-        Agendar Serviço
-        </button>
+    
+        <button  class="btn-agendar" [routerLink]="['/client/agendar', servico.id]"[queryParams]="{ profissionalId: servico.profissionalId }">Agendar</button>
+
     </div>
   </div>
 
