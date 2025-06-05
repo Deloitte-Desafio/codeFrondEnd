@@ -22,6 +22,14 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'profile',
+    loadComponent: () =>
+      import('./shared/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
+    data: { roles: ['CLIENTE', 'PROFISSIONAL'] },
+  },
+  {
     path: 'client',
     canActivate: [AuthGuard],
     data: { role: 'CLIENTE' },
@@ -87,7 +95,8 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./shared/profile/profile.component').then(
             (m) => m.ProfileComponent
-          )
+          ),
+        data: { roles: ['CLIENTE', 'PROFISSIONAL'] },
       },
       {
         path: 'availability',
